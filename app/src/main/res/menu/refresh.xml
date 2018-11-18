@@ -3,8 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/search_icon"
+        android:title="Item"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="android.widget.SearchView" />
+    <item
         android:id="@+id/refresh_menu"
         android:icon="@drawable/sync"
         android:title="@string/item"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_now_playing"
+        android:title="Now Playing"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/menu_upcoming"
+        android:title="Upcoming"
+        app:showAsAction="collapseActionView" />
 </menu>
