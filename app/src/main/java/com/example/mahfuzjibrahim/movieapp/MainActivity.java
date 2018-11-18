@@ -78,14 +78,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.onMo
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.refresh_menu){
-            Toast.makeText(this,"refresh",Toast.LENGTH_SHORT).show();
 
             rvListMovie = findViewById(R.id.r_view_list_movie);
             movieAdapter = new MovieAdapter();
             if(pil == 0){
                 getNowPlayingMovie();
-            }else{
+            }else if(pil == 1){
                 getUpomingMovie();
+            }else{
+                getSearchingMovie(getPreferences(Context.MODE_PRIVATE).getString("query",null));
             }
             movieAdapter.setClickHandler(this);
 
@@ -95,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.onMo
         }
         else if(item.getItemId() == R.id.menu_now_playing){
             pil = 0;
-            Toast.makeText(this,"refresh",Toast.LENGTH_SHORT).show();
 
             rvListMovie = findViewById(R.id.r_view_list_movie);
             movieAdapter = new MovieAdapter();
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.onMo
             rvListMovie.setLayoutManager(new LinearLayoutManager(this));
         }else if(item.getItemId() == R.id.menu_upcoming){
             pil = 1;
-            Toast.makeText(this,"refresh",Toast.LENGTH_SHORT).show();
 
             rvListMovie = findViewById(R.id.r_view_list_movie);
             movieAdapter = new MovieAdapter();
@@ -294,6 +293,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.onMo
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             Log.d("ibrahimPntr", query);
+            pil = 2;
             SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("display_status_key", 3);
